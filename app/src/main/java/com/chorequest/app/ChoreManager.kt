@@ -1,39 +1,21 @@
 package com.chorequest.app
 
-import android.graphics.Color
+import com.chorequest.app.data.ChoreRepository
+import com.chorequest.app.data.HardcodedChoreRepository
 import com.chorequest.app.model.Chore
 import com.chorequest.app.model.ChoreAssignment
 import com.chorequest.app.model.Kid
 import kotlin.random.Random
 
-class ChoreManager {
+class ChoreManager(private val repository: ChoreRepository = HardcodedChoreRepository()) {
 
-    private val kids = listOf(
-        Kid(1, "Alex", Color.parseColor("#FF6B6B"), 0),
-        Kid(2, "Sam", Color.parseColor("#4ECDC4"), 0),
-        Kid(3, "Jordan", Color.parseColor("#FFD93D"), 0)
-    )
-
-    private val availableChores = listOf(
-        Chore(1, "Clean your room", 10, "🧹"),
-        Chore(2, "Do the dishes", 15, "🍽️"),
-        Chore(3, "Take out trash", 10, "🗑️"),
-        Chore(4, "Feed the pet", 5, "🐕"),
-        Chore(5, "Water plants", 5, "🌱"),
-        Chore(6, "Fold laundry", 15, "👕"),
-        Chore(7, "Set the table", 5, "🍴"),
-        Chore(8, "Vacuum floor", 20, "🧽"),
-        Chore(9, "Make your bed", 5, "🛏️"),
-        Chore(10, "Help with groceries", 10, "🛒"),
-        Chore(11, "Clean bathroom", 20, "🚿"),
-        Chore(12, "Organize toys", 10, "🧸")
-    )
-
-    fun getKids(): List<Kid> = kids
+    fun getKids(): List<Kid> = repository.getKids()
 
     fun generateDailyChores(): List<ChoreAssignment> {
+        val availableChores = repository.getAvailableChores()
         val shuffledChores = availableChores.shuffled(Random)
         val assignments = mutableListOf<ChoreAssignment>()
+        val kids = repository.getKids()
 
         // Assign 3-4 chores per kid
         kids.forEachIndexed { index, kid ->
