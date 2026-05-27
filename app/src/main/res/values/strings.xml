@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ChoreQuest</string>
+    <string name="daily_chores">Today\'s Chore Quest!</string>
+    <string name="shuffle_button">Shuffle Chores</string>
+    <string name="points">%d pts</string>
+    <string name="complete_button">Complete!</string>
+    <string name="completed">✓ Done!</string>
+</resources>
