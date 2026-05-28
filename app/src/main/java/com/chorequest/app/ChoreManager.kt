@@ -20,7 +20,11 @@ class ChoreManager(private val repository: ChoreRepository = HardcodedChoreRepos
         // Assign 3-4 chores per kid
         kids.forEachIndexed { index, kid ->
             val startIdx = index * 4
-            val choresForKid = shuffledChores.subList(startIdx, minOf(startIdx + 4, shuffledChores.size))
+            if (startIdx >= shuffledChores.size) {
+                return@forEachIndexed
+            }
+            val endIdx = minOf(startIdx + 4, shuffledChores.size)
+            val choresForKid = shuffledChores.subList(startIdx, endIdx)
             choresForKid.forEach { chore ->
                 assignments.add(ChoreAssignment(kid, chore, false))
             }
